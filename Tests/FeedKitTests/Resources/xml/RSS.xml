@@ -52,7 +52,7 @@
       <description>I'm headed for France. I wasn't gonna go this year, but then last week "Valley Girl" came out and I said to myself, Joe Bob, you gotta get out of the country for a while.</description>
       <enclosure length="24986239" type="audio/mpeg" url="http://dallas.example.com/joebob_050689.mp3" />
       <guid isPermaLink="false">tag:dallas.example.com,4131:news</guid>
-      <pubDate>Fri, 05 Oct 2007 09:00:00 CST</pubDate>
+      <pubDate>Fri, 05 Oct 2007 24:00:00 CST</pubDate>
       <source url="http://la.example.com/rss.xml">Los Angeles Herald-Examiner</source>
     </item>
     <item>
@@ -65,7 +65,7 @@
       <description>I'm headed for France. I wasn't gonna go this year, but then last week &lt;a href="http://www.imdb.com/title/tt0086525/"&gt;Valley Girl&lt;/a&gt; came out and I said to myself, Joe Bob, you gotta get out of the country for a while.</description>
       <enclosure length="24986239" type="audio/mpeg" url="http://dallas.example.com/joebob_050689.mp3" />
       <guid isPermaLink="true">http://dallas.example.com/item/1234</guid>
-      <pubDate>Fri, 05 Oct 2007 09:00:00 CST</pubDate>
+      <pubDate>Fri, 05 Oct 2007 24:00:00 CST</pubDate>
       <source url="http://la.example.com/rss.xml">Los Angeles Herald-Examiner</source>
     </item>
   </channel>
