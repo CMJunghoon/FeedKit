@@ -99,7 +99,8 @@ final class ISO8601DateFormatter: PermissiveDateFormatter, @unchecked Sendable {
     [
       "yyyy-MM-dd'T'HH:mm:ss.SSZZZZZ",
       "yyyy-MM-dd'T'HH:mm:ssZZZZZ",
-      "yyyy-MM-dd'T'HH:mm"
+      "yyyy-MM-dd'T'HH:mm",
+      "EEE, dd MMM yyyy HH:mm:ss zzz"
     ]
   }
 
@@ -108,7 +109,8 @@ final class ISO8601DateFormatter: PermissiveDateFormatter, @unchecked Sendable {
       // Not fully compatible with ISO8601.
       // The correct ISO8601 format would separate the seconds (SS) from the timezone
       // offset (ZZZZZ) with a colon or period.
-      "yyyy-MM-dd'T'HH:mmSSZZZZZ"
+      "yyyy-MM-dd'T'HH:mmSSZZZZZ",
+      "EEE, dd MMM yyyy HH:mm:ss zzz"
     ]
   }
 }
@@ -123,7 +125,8 @@ final class RFC3339DateFormatter: PermissiveDateFormatter, @unchecked Sendable {
       // RFC 3339 without fractional seconds.
       "yyyy-MM-dd'T'HH:mm:ssZZZZZ",
       // RFC 3339 with 2-digit fractional seconds (limited precision).
-      "yyyy-MM-dd'T'HH:mm:ss.SSZZZZZ"
+      "yyyy-MM-dd'T'HH:mm:ss.SSZZZZZ",
+      "EEE, dd MMM yyyy HH:mm:ss zzz"
     ]
   }
 
@@ -132,7 +135,8 @@ final class RFC3339DateFormatter: PermissiveDateFormatter, @unchecked Sendable {
       // Not fully compatible with RFC3339 (incorrect timezone format).
       "yyyy-MM-dd'T'HH:mm:ss-SS:ZZ",
       // Not fully compatible with RFC3339 (missing timezone information).
-      "yyyy-MM-dd'T'HH:mm:ss"
+      "yyyy-MM-dd'T'HH:mm:ss",
+      "EEE, dd MMM yyyy HH:mm:ss zzz"
     ]
   }
 }
@@ -156,6 +160,8 @@ final class RFC822DateFormatter: PermissiveDateFormatter, @unchecked Sendable {
       "EEE, dd MMM yyyy, HH:mm:ss zzz",
       
       "yyyy-MM-dd HH:mm:ss ZZZZ z",
+      
+      "EEE, dd MMM yyyy HH:mm:ss zzz"
     ]
   }
 
