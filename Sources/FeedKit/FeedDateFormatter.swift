@@ -155,7 +155,8 @@ final class RFC822DateFormatter: PermissiveDateFormatter, @unchecked Sendable {
       // RFC 822 compatible, includes weekday, day, month, year, time, and timezone.
       "EEE, dd MMM yyyy, HH:mm:ss zzz",
       
-      "yyyy-MM-dd HH:mm:ss ZZZZ z"
+      "yyyy-MM-dd HH:mm:ss ZZZZ z",
+      "EEE, dd MMM yyyy HH:mm:ss zzz"
     ]
   }
 
