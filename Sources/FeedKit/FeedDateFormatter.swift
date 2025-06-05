@@ -156,7 +156,6 @@ final class RFC822DateFormatter: PermissiveDateFormatter, @unchecked Sendable {
       "EEE, dd MMM yyyy, HH:mm:ss zzz",
       
       "yyyy-MM-dd HH:mm:ss ZZZZ z",
-      "EEE, dd MMM yyyy HH:mm:ss zzz"
     ]
   }
 
@@ -166,7 +165,9 @@ final class RFC822DateFormatter: PermissiveDateFormatter, @unchecked Sendable {
       // Non-standard, similar to RFC 822 with numeric timezone.
       "d MMM yyyy HH:mm:ss Z",
       // Non-standard, ISO-like format with numeric timezone.
-      "yyyy-MM-dd HH:mm:ss Z"
+      "yyyy-MM-dd HH:mm:ss Z",
+      
+      "EEE, dd MMM yyyy HH:mm:ss zzz"
     ]
   }
 
@@ -214,7 +215,8 @@ final class RFC1123DateFormatter: PermissiveDateFormatter, @unchecked Sendable {
   override var permissiveDateFormats: [String] {
     [
       // Omits the time and timezone
-      "EEE, dd MMM yyyy"
+      "EEE, dd MMM yyyy",
+      "EEE, dd MMM yyyy HH:mm:ss zzz"
     ]
   }
 }
