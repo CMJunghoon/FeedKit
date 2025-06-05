@@ -205,7 +205,8 @@ final class RFC1123DateFormatter: PermissiveDateFormatter, @unchecked Sendable {
   /// List of date formats supported for RFC1123.
   override var dateFormats: [String] {
     [
-      "EEE, dd MMM yyyy HH:mm:ss z"
+      "EEE, dd MMM yyyy HH:mm:ss z",
+      "EEE, dd MMM yyyy HH:mm:ss zzz"
     ]
   }
 
