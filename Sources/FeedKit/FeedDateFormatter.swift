@@ -54,12 +54,41 @@ class PermissiveDateFormatter: DateFormatter, @unchecked Sendable {
 
   /// Attempts to parse a string into a Date using available formats.
   override func date(from string: String) -> Date? {
-    let trimmedString = string.trimmingCharacters(in: .whitespacesAndNewlines)
+    var trimmedString = string.trimmingCharacters(in: .whitespacesAndNewlines)
 
     guard !trimmedString.isEmpty else {
       return nil
     }
 
+      
+      // "24:00:00" 처리
+      if trimmedString.contains("24:00:00") {
+          // "Sun, 18 Jun 2017 24:00:00 GMT" 같은 형식 처리
+          let pattern = #"([A-Za-z]{3}, \d{2} [A-Za-z]{3} \d{4}) 24:00:00 GMT"#
+          let regex = try? NSRegularExpression(pattern: pattern)
+
+          if let match = regex?.firstMatch(in: trimmedString, range: NSRange(trimmedString.startIndex..., in: trimmedString)) {
+              if let dateRange = Range(match.range(at: 1), in: trimmedString) {
+                  let datePart = String(trimmedString[dateRange])
+
+                  let formatter = DateFormatter()
+                  formatter.locale = Locale(identifier: "en_US_POSIX")
+                  formatter.dateFormat = "EEE, dd MMM yyyy"
+
+                  if let date = formatter.date(from: datePart) {
+                      // 하루 뒤로 이동
+                      let nextDay = Calendar.current.date(byAdding: .day, value: 1, to: date)!
+
+                      // 다시 문자열로 만들기
+                      let newDatePart = formatter.string(from: nextDay)
+                      trimmedString = trimmedString.replacingOccurrences(
+                          of: "\(datePart) 24:00:00 GMT",
+                          with: "\(newDatePart) 00:00:00 GMT"
+                      )
+                  }
+              }
+          }
+      }
     // Attempts parsing with the last successful format first to avoid
     // unnecessary iterations over all formats.
     if dateFormat != nil, !dateFormat.isEmpty {
