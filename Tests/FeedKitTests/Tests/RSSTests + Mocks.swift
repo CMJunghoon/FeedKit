@@ -119,7 +119,7 @@ extension RSSTests {
                 isPermaLink: false
               )
             ),
-            pubDate: FeedDateFormatter(spec: .rfc822).date(from: "Fri, 05 Oct 2007 24:00:00 CST"),
+            pubDate: FeedDateFormatter(spec: .rfc822).date(from: "Fri, 05 Oct 2007 24:23:34 CST"),
             source: .init(
               text: "Los Angeles Herald-Examiner",
               attributes: .init(

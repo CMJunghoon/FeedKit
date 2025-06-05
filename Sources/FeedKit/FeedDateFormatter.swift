@@ -61,34 +61,32 @@ class PermissiveDateFormatter: DateFormatter, @unchecked Sendable {
       return nil
     }
 
-      
-      // "24:00:00" 처리
-      if trimmedString.contains("24:00:00") {
-              // 예: "Sun, 18 Jun 2017 24:00:00 CST"
-              let pattern = #"([A-Za-z]{3}, \d{2} [A-Za-z]{3} \d{4}) 24:00:00"#
-              let regex = try? NSRegularExpression(pattern: pattern)
+      // "24:"로 시작하는 시간 처리 (예: 24:00:00, 24:28:33 등)
+          let pattern = #"([A-Za-z]{3}, \d{2} [A-Za-z]{3} \d{4}) 24:([0-5][0-9]:[0-5][0-9])"#
+          let regex = try? NSRegularExpression(pattern: pattern)
 
-              if let match = regex?.firstMatch(in: trimmedString, range: NSRange(trimmedString.startIndex..., in: trimmedString)) {
-                  if let dateRange = Range(match.range(at: 1), in: trimmedString) {
-                      let datePart = String(trimmedString[dateRange])
+      if let match = regex?.firstMatch(in: trimmedString, range: NSRange(trimmedString.startIndex..., in: trimmedString)) {
+              if let dateRange = Range(match.range(at: 1), in: trimmedString),
+                 let timeSuffixRange = Range(match.range(at: 2), in: trimmedString) {
 
-                      let formatter = DateFormatter()
-                      formatter.locale = Locale(identifier: "en_US_POSIX")
-                      formatter.dateFormat = "EEE, dd MMM yyyy"
+                  let datePart = String(trimmedString[dateRange])
+                  let timeSuffix = String(trimmedString[timeSuffixRange]) // ex: "28:33"
 
-                      if let date = formatter.date(from: datePart) {
-                          // 하루 뒤로 이동
-                          let nextDay = Calendar.current.date(byAdding: .day, value: 1, to: date)!
+                  // 기존 날짜 파싱
+                  let formatter = DateFormatter()
+                  formatter.locale = Locale(identifier: "en_US_POSIX")
+                  formatter.dateFormat = "EEE, dd MMM yyyy"
 
-                          // 다시 문자열로 만들기
-                          let newDatePart = formatter.string(from: nextDay)
+                  if let date = formatter.date(from: datePart) {
+                      // 하루 뒤 날짜
+                      let nextDay = Calendar.current.date(byAdding: .day, value: 1, to: date)!
+                      let newDatePart = formatter.string(from: nextDay)
 
-                          // "24:00:00"을 "00:00:00"으로 바꾸되 타임존은 그대로 유지
-                          trimmedString = trimmedString.replacingOccurrences(
-                              of: "\(datePart) 24:00:00",
-                              with: "\(newDatePart) 00:00:00"
-                          )
-                      }
+                      // "24:xx:xx" → "00:xx:xx" 으로 바꾸고 날짜도 교체
+                      trimmedString = trimmedString.replacingOccurrences(
+                          of: "\(datePart) 24:\(timeSuffix)",
+                          with: "\(newDatePart) 00:\(timeSuffix)"
+                      )
                   }
               }
           }
