@@ -54,7 +54,6 @@ class PermissiveDateFormatter: DateFormatter, @unchecked Sendable {
 
   /// Attempts to parse a string into a Date using available formats.
   override func date(from string: String) -> Date? {
-      print("PermissiveDateFormatter", string)
     var trimmedString = string.trimmingCharacters(in: .whitespacesAndNewlines)
 
     guard !trimmedString.isEmpty else {
@@ -90,7 +89,7 @@ class PermissiveDateFormatter: DateFormatter, @unchecked Sendable {
                   }
               }
           }
-      print("##### trimmedString", trimmedString)
+
     // Attempts parsing with the last successful format first to avoid
     // unnecessary iterations over all formats.
     if dateFormat != nil, !dateFormat.isEmpty {
@@ -210,7 +209,6 @@ final class RFC822DateFormatter: PermissiveDateFormatter, @unchecked Sendable {
 
   /// Attempts to parse a string into a Date using primary and backup formats.
   override func date(from string: String) -> Date? {
-      print("RFC822DateFormatter", string)
     if let date = super.date(from: string) {
       return date
     }
