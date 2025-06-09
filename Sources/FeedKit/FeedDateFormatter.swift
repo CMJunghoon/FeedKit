@@ -54,8 +54,11 @@ class PermissiveDateFormatter: DateFormatter, @unchecked Sendable {
 
   /// Attempts to parse a string into a Date using available formats.
   override func date(from string: String) -> Date? {
-    let trimmedString = string.trimmingCharacters(in: .whitespacesAndNewlines)
-
+    var trimmedString = string.trimmingCharacters(in: .whitespacesAndNewlines)
+    if let trimmed = Trimmed24Hours.expression(trimmedString) {
+        trimmedString = trimmed
+    }
+      
     guard !trimmedString.isEmpty else {
       return nil
     }
